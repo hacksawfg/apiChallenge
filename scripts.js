@@ -49,10 +49,10 @@ function wikiDataCheck(month, day, year) {
     }
 function displaywikiDataResults(wikiData) {
     let wikiCard = document.createElement('li'); // creates list item
-    let wikiTitle = document.createElement('a');  // create h1 item
+    let wikiTitle = document.createElement('a');  // creates link to page
     let wikiViews = document.createElement('p'); // create number of views field
 
-    wikiTitle.setAttribute('href', `https://${ project }/wiki/${ wikiData.article }`); // wikiData.article is the reference to the object that contains the string
+    wikiTitle.setAttribute('href', `https://${ project }.org/wiki/${ wikiData.article }`); // wikiData.article is the reference to the object that contains the string
     wikiTitle.target = "_blank"; // can use attribute to set instead of setAttribute
     wikiTitle.textContent = `${ wikiTitle }`;
     wikiTitle.innerText = wikiData.article;
