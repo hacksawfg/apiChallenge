@@ -3,7 +3,7 @@
 // Step 3 - retrieve and display the data;
 
 
-
+// Look for date change, then get data
 document.getElementById("checkdate").addEventListener("change", function() {
     let wikiDate = new Date(this.value);
     let month = (wikiDate.getUTCMonth() + 1).toString();
@@ -15,9 +15,11 @@ document.getElementById("checkdate").addEventListener("change", function() {
 
 });
 
-
+// define base URL for API search
 const baseURL = 'https://wikimedia.org/api/rest_v1/metrics/pageviews/top';
 
+
+// Custom header required for API use
 let headers = new Headers({
     "API-User-Agent":     "hacksawfg@yahoo.com"
 });
@@ -35,7 +37,7 @@ function wikiDataCheck(month, day, year) {
     while (listElement.firstChild) {
         listElement.removeChild(listElement.firstChild);
     }
-    
+
     let searchURL = `${ baseURL }/${ project }/all-access/${ year }/${ month }/${ day }`; // sets URL for data retrieval
     fetch(searchURL) // grab URL w/above values
         .then(response => response.json())
@@ -51,6 +53,8 @@ function wikiDataCheck(month, day, year) {
         })
 
     }
+
+// Add body to page   
 function displaywikiDataResults(wikiData) {
     let wikiCard = document.createElement('li'); // creates list item
     let wikiTitle = document.createElement('a');  // creates link to page
