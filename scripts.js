@@ -5,13 +5,11 @@
 
 
 document.getElementById("checkdate").addEventListener("change", function() {
-   let wikiDate = new Date(this.value);
-    // event.preventDefault();
-    //let dateEntered = new Date(wikiDate);
+    let wikiDate = new Date(this.value);
     let month = (wikiDate.getUTCMonth() + 1).toString();
-    monthFixed = month.padStart(2, '0');
+    monthFixed = month.padStart(2, '0');  // ensure month is appropriatly formatted for single digits
     let date = wikiDate.getUTCDate().toString();
-    dateFixed = date.padStart(2,'0');
+    dateFixed = date.padStart(2,'0'); // ensure date is appropriately formatted for single digits
     let year = wikiDate.getUTCFullYear().toString();
     wikiDataCheck(monthFixed, dateFixed, year);
 
@@ -21,7 +19,7 @@ document.getElementById("checkdate").addEventListener("change", function() {
 const baseURL = 'https://wikimedia.org/api/rest_v1/metrics/pageviews/top';
 
 let headers = new Headers({
-    "API-User-Agent":     "hacksawfg@gmail.com"
+    "API-User-Agent":     "hacksawfg@yahoo.com"
 });
 
 // // let targetMonth = "07";
@@ -32,6 +30,12 @@ let project = "en.wikipedia";
 let listElement = document.getElementById('wiki-list');
 
 function wikiDataCheck(month, day, year) {
+    
+    // removes data for different date selection
+    while (listElement.firstChild) {
+        listElement.removeChild(listElement.firstChild);
+    }
+    
     let searchURL = `${ baseURL }/${ project }/all-access/${ year }/${ month }/${ day }`; // sets URL for data retrieval
     fetch(searchURL) // grab URL w/above values
         .then(response => response.json())
@@ -63,12 +67,3 @@ function displaywikiDataResults(wikiData) {
 
     listElement.appendChild(wikiCard);
 }
-
-
-
-
-
-
-
-// need changeevent 'change' to deal with date box
-// need date object
